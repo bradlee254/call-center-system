@@ -4,6 +4,7 @@ export type UserRole = "ADMIN" | "SUPERVISOR" | "AGENT";
 
 export interface IUser {
   name: string;
+  email: string;
   password: string;
   role: UserRole;
   createdAt: Date;
@@ -17,9 +18,17 @@ const userSchema = new Schema<IUser>(
       required: true,
       unique: true,
     },
+    email:{
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+    },
     password: {
       type: String,
       required: true,
+    
     },
     role: {
       type: String,
