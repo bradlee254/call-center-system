@@ -42,3 +42,18 @@ export const assignCall = async (req: Request, res: Response) => {
         res.status(500).json({ message: error.message });
     }
 };
+export const updateStatus = async (req: Request, res: Response) => {
+    try {
+        const { callId } = req.params;
+        const { status } = req.body;
+
+        const call = await Call.findByIdAndUpdate(
+            callId,
+            { status },
+            { new: true }
+        );
+        res.json(call);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
